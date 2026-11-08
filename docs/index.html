@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BMW Dealership</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF1F6; --surface:#FFFFFF; --ink:#0F1A2B; --mute:#5C6B7D; --line:#D3DBE5;
+  --accent:#1C69D4; --ok:#178A55; --err:#C62828;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1622; --surface:#162231; --ink:#E9EEF5; --mute:#93A3B6; --line:#2A3A4D;
+    --accent:#5B9BF0; --ok:#4FD08D; --err:#FF7B7B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1622; --surface:#162231; --ink:#E9EEF5; --mute:#93A3B6; --line:#2A3A4D;
+  --accent:#5B9BF0; --ok:#4FD08D; --err:#FF7B7B; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;justify-content:center;min-height:100vh}
+main{width:100%;max-width:980px;padding:24px 18px 40px}
+.stripe{width:84px;height:6px;border-radius:3px;margin-bottom:14px;background:linear-gradient(90deg,#81C4FF 0 33.3%,#16588E 33.3% 66.6%,#E7222E 66.6%)}
+h1{font-size:2.1rem;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+.sub{margin:0 0 18px;color:var(--mute)}
+.hero{background:var(--surface);border-radius:18px;overflow:hidden;margin-bottom:18px;display:grid;grid-template-columns:1fr}
+@media (min-width:760px){.hero{grid-template-columns:1.1fr 1fr}}
+.stage{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;min-height:240px;padding:24px;color:var(--on);background-image:linear-gradient(160deg,rgba(255,255,255,.2),rgba(0,0,0,.3)),linear-gradient(var(--car),var(--car))}
+.stage small{font-size:.95rem;font-weight:700;opacity:.8}
+.stage strong{font-size:clamp(2.6rem,9vw,4rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.stage em{font-style:normal;font-weight:700;opacity:.85;margin-top:6px}
+.chip{display:flex;align-items:flex-end;height:72px;padding:10px 14px;margin-bottom:8px;border-radius:10px;color:var(--on);font-weight:800;font-size:1.25rem;background-image:linear-gradient(160deg,rgba(255,255,255,.2),rgba(0,0,0,.3)),linear-gradient(var(--car),var(--car))}
+.info{padding:20px 20px 22px}
+.trow{display:flex;justify-content:space-between;align-items:center}
+h2{margin:0;font-size:1.7rem;font-weight:800;letter-spacing:-.01em}
+h3{margin:16px 0 8px;font-size:1rem}
+.note{color:var(--mute);margin:2px 0 14px;font-size:.95rem}
+.heart{border:0;background:none;font-size:1.6rem;line-height:1;cursor:pointer;color:var(--mute)}
+.heart.on{color:var(--err)}
+.bar{margin-bottom:10px}
+.bar div{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:4px;color:var(--mute)}
+.bar b{color:var(--ink)}
+.bar i{display:block;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar i span{display:block;height:100%;background:var(--accent);border-radius:4px}
+.sw{display:flex;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+.dot{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.dot.sel{outline:3px solid var(--accent);outline-offset:2px}
+.calc label{display:block;font-size:.9rem;color:var(--mute);margin-bottom:6px}
+.calc label b{color:var(--ink)}
+.calc input[type=range],.filters input[type=range]{width:100%;accent-color:var(--accent)}
+.res{font-weight:800;margin:6px 0 0}
+.pay{display:flex;gap:8px;flex-wrap:wrap}
+.pay input{flex:1;min-width:130px;font:inherit;font-size:1.05rem;font-weight:700;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.modes{display:flex;gap:8px;margin-bottom:12px}
+.mode{flex:1;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:transparent;color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.mode.sel{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.calc .btn{margin-top:12px}
+.btn{padding:11px 18px;border:0;border-radius:10px;background:var(--accent);color:#fff;font:inherit;font-weight:800;cursor:pointer}
+.msg{min-height:1.3em;margin:8px 0 0;font-weight:700;font-size:.92rem;color:var(--err)}
+.receipt{margin-top:14px;padding:14px;border:1.5px solid var(--ok);border-radius:12px;color:var(--ok);font-weight:700;line-height:1.5}
+.badge{font-size:.78rem;font-weight:800;color:var(--ok);border:1.5px solid var(--ok);border-radius:999px;padding:2px 10px;background:var(--surface)}
+.badge.big{position:absolute;top:14px;left:14px;font-size:.95rem;padding:4px 14px}
+.filters{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:14px}
+.filters .cnt{color:var(--mute);font-size:.95rem}
+.filters .cnt b{color:var(--ink)}
+.filters .bud{flex:1;min-width:180px;font-size:.9rem;color:var(--mute)}
+.filters .bud b{color:var(--ink)}
+select,.tog{font:inherit;padding:8px 10px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);cursor:pointer}
+.tog{font-weight:700}
+.tog[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{position:relative;background:var(--surface);border-radius:14px;overflow:hidden;border:2px solid transparent}
+.card.cur{border-color:var(--accent)}
+.card.sold{opacity:.55}
+.pick{display:block;width:100%;padding:12px 14px 14px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.pick strong{display:block;font-size:1.05rem;margin-top:4px}
+.pick small{color:var(--mute)}
+.pick .pr{display:block;font-weight:800;margin-top:6px;font-variant-numeric:tabular-nums}
+.card .heart{position:absolute;top:8px;right:10px;font-size:1.3rem}
+.card .badge{position:absolute;bottom:12px;right:12px}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:26px 0}
+.reset{margin-top:20px}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+  <div class="stripe"></div>
+  <h1>BMW Dealership</h1>
+  <p class="sub">Avtomobilə bax, rəngini seç, ödənişi hesabla və satın al.</p>
+
+  <section class="hero" id="hero"></section>
+
+  <div class="filters">
+    <span class="cnt">Satışda: <b id="cnt">7</b> / 7</span>
+    <label class="bud">Büdcə: ən çox <b id="bv">80,000 USD</b>
+      <input id="budget" type="range" min="35000" max="80000" step="5000" value="80000"></label>
+    <select id="sort" aria-label="Sıralama">
+      <option value="def">Standart sıra</option>
+      <option value="asc">Qiymət: ucuzdan bahaya</option>
+      <option value="desc">Qiymət: bahadan ucuza</option>
+      <option value="hp">At gücü: çoxdan aza</option>
+    </select>
+    <button class="tog" id="favonly" data-act="favonly" aria-pressed="false">♥ Sevimlilər</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <button class="tog reset" data-act="reset">Hamısını sıfırla</button>
+</main>
+
+<script>
+(function(){
+  var COLORS = [["Qara","#1B1F27"],["Ağ","#F2F4F7"],["Mavi","#1C69D4"],["Qırmızı","#C62828"],["Boz","#7D8794"],["Yaşıl","#1F7A5A"]];
+  var DATA = [
+    {id:1, model:"BMW G20",    body:"sedan", il:2021, hp:184, motor:"2.0L Turbo Benzin", price:38000, note:"", color:"#F2F4F7"},
+    {id:2, model:"BMW G30",    body:"sedan", il:2020, hp:252, motor:"2.0L Turbo Benzin", price:45000, note:"", color:"#7D8794"},
+    {id:3, model:"BMW M3 G80", body:"sedan", il:2023, hp:510, motor:"3.0L TwinPower Turbo (S58)", price:80000, note:"", color:"#1C69D4"},
+    {id:4, model:"BMW M5 E60", body:"sedan", il:2008, hp:507, motor:"5.0L V10 (S85)", price:35000, note:"Yaxşı vəziyyətdə", color:"#1B1F27"},
+    {id:5, model:"BMW M5 F10", body:"sedan", il:2015, hp:560, motor:"4.4L V8 Twin-Turbo (S63)", price:42000, note:"", color:"#C62828"},
+    {id:6, model:"BMW M3 F82", body:"coupe", il:2018, hp:431, motor:"3.0L Twin-Turbo (S55)", price:50000, note:"", color:"#1F7A5A"},
+    {id:7, model:"BMW M2 CS",  body:"coupe", il:2020, hp:450, motor:"3.0L Twin-Turbo (S55)", price:75000, note:"Təxmini qiymət", color:"#F2F4F7"}
+  ];
+
+  var cars, sel = 1, sortBy = "def", budget = 80000, favOnly = false, favs = [], calc = {down:20, months:36}, payMode = "cash";
+  var $ = function(id){ return document.getElementById(id); };
+  var usd = function(n){ return n.toLocaleString("en-US") + " USD"; };
+  var find = function(id){ return cars.filter(function(c){ return c.id === id; })[0]; };
+  var colorName = function(hex){ var m = COLORS.filter(function(x){ return x[1] === hex; })[0]; return m ? m[0] : ""; };
+
+  try { favs = JSON.parse(localStorage.getItem("bmw-fav")) || []; } catch(e){ favs = []; }
+  function saveFavs(){ try { localStorage.setItem("bmw-fav", JSON.stringify(favs)); } catch(e){} }
+
+  function onColor(hex){
+    var r = parseInt(hex.substr(1, 2), 16), g = parseInt(hex.substr(3, 2), 16), b = parseInt(hex.substr(5, 2), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) > 150 ? "#0F1A2B" : "#FFFFFF";
+  }
+  function codeOf(c){ return c.model.replace("BMW ", ""); }
+  function chip(c){
+    return '<div class="chip" style="--car:' + c.color + ';--on:' + onColor(c.color) + '">' + codeOf(c) + '</div>';
+  }
+  function bar(label, val, pct){
+    return '<div class="bar"><div><span>' + label + '</span><b>' + val + '</b></div><i><span style="width:' + Math.max(4, Math.min(100, pct)) + '%"></span></i></div>';
+  }
+  function heart(c){
+    var on = favs.indexOf(c.id) >= 0;
+    return '<button class="heart' + (on ? ' on' : '') + '" data-act="fav" data-id="' + c.id + '" aria-pressed="' + on + '" aria-label="Sevimlilərə əlavə et">' + (on ? '♥' : '♡') + '</button>';
+  }
+
+  function renderHero(){
+    var c = find(sel);
+    var h = '<div class="stage" style="--car:' + c.color + ';--on:' + onColor(c.color) + '"><small>BMW</small><strong>' + codeOf(c) + '</strong><em>' + c.hp + ' hp · ' + c.il + '</em>' + (c.sold ? '<span class="badge big">Satıldı</span>' : '') + '</div><div class="info">';
+    h += '<div class="trow"><h2>' + c.model + '</h2>' + heart(c) + '</div>';
+    h += '<p class="note">' + c.motor + (c.note ? ' · ' + c.note : '') + '</p>';
+    h += bar("At gücü", c.hp + " hp", c.hp / 600 * 100) + bar("Buraxılış ili", c.il, (c.il - 2005) / 20 * 100) + bar("Qiymət", usd(c.price), c.price / 80000 * 100);
+    h += '<div class="sw" role="group" aria-label="Rəng seçimi">' + COLORS.map(function(x){
+      return '<button class="dot' + (x[1] === c.color ? ' sel' : '') + '" data-act="color" data-color="' + x[1] + '" title="' + x[0] + '" aria-label="' + x[0] + '" style="background:' + x[1] + '"></button>';
+    }).join("") + '</div>';
+    if (c.sold) {
+      h += '<div class="receipt">Alış tamamlandı: ' + c.model + ', rəng: ' + colorName(c.color) + '.<br>'
+        + (c.plan ? 'İlkin ödəniş: ' + usd(c.plan.down) + '<br>Aylıq ödəniş: ' + usd(c.plan.monthly) + ' × ' + c.plan.months + ' ay' : 'Geri qaytarılacaq məbləğ: ' + usd(c.change))
+        + '<br>Sizinlə iş görmək xoş idi. Xoş sürüşlər!</div>';
+    } else {
+      h += '<h3>Ödəniş üsulu</h3><div class="modes" role="group" aria-label="Ödəniş üsulu">'
+        + '<button class="mode' + (payMode === "cash" ? ' sel' : '') + '" data-act="mode" data-mode="cash" aria-pressed="' + (payMode === "cash") + '">Nağd</button>'
+        + '<button class="mode' + (payMode === "inst" ? ' sel' : '') + '" data-act="mode" data-mode="inst" aria-pressed="' + (payMode === "inst") + '">Hissə-hissə</button></div>';
+      if (payMode === "cash") {
+        h += '<div class="pay"><input id="amt" type="text" inputmode="numeric" autocomplete="off" aria-label="Məbləğ (USD)" placeholder="Məbləğ, USD (' + c.price + ')">'
+          + '<button class="btn" data-act="buy">Satın al</button></div><p class="msg" id="msg" aria-live="polite"></p>';
+      } else {
+        h += '<div class="calc">'
+          + '<label>İlkin ödəniş: <b id="downv"></b><input id="down" type="range" min="0" max="50" step="5" value="' + calc.down + '"></label>'
+          + '<label>Müddət: <b id="monv"></b><input id="months" type="range" min="12" max="60" step="12" value="' + calc.months + '"></label>'
+          + '<p class="res" id="calcres"></p><p class="note">Faizsiz, təxmini hesablamadır.</p>'
+          + '<button class="btn" data-act="buyinst">Hissə-hissə satın al</button></div>';
+      }
+    }
+    $("hero").innerHTML = h + '</div>';
+    updateCalc();
+  }
+
+  function updateCalc(){
+    var c = find(sel);
+    if (c.sold || !$("down")) return;
+    var down = Math.round(c.price * calc.down / 100);
+    $("downv").textContent = calc.down + "% (" + usd(down) + ")";
+    $("monv").textContent = calc.months + " ay";
+    $("calcres").textContent = "Aylıq ödəniş: " + usd(Math.round((c.price - down) / calc.months));
+  }
+
+  function renderGrid(){
+    var left = cars.filter(function(c){ return !c.sold; }).length;
+    $("cnt").textContent = left;
+    var l = cars.filter(function(c){ return c.price <= budget && (!favOnly || favs.indexOf(c.id) >= 0); });
+    if (sortBy === "asc") l.sort(function(a, b){ return a.price - b.price; });
+    if (sortBy === "desc") l.sort(function(a, b){ return b.price - a.price; });
+    if (sortBy === "hp") l.sort(function(a, b){ return b.hp - a.hp; });
+    $("grid").innerHTML = l.length ? l.map(function(c){
+      return '<div class="card' + (c.id === sel ? ' cur' : '') + (c.sold ? ' sold' : '') + '">'
+        + '<button class="pick" data-act="select" data-id="' + c.id + '">' + chip(c) + '<strong>' + c.model + '</strong><small>' + c.il + ' · ' + c.hp + ' hp</small><span class="pr">' + usd(c.price) + '</span></button>'
+        + heart(c) + (c.sold ? '<span class="badge">Satıldı</span>' : '') + '</div>';
+    }).join("") : '<p class="empty">Bu filtrə uyğun avtomobil yoxdur.</p>';
+  }
+
+  function renderAll(){ renderHero(); renderGrid(); }
+
+  function reset(){
+    cars = DATA.map(function(c){ return Object.assign({}, c, {sold:false, change:0}); });
+    sel = 1; renderAll();
+  }
+
+  function buy(){
+    var c = find(sel), raw = $("amt").value.replace(/[\s,]/g, "");
+    if (!/^\d+$/.test(raw)) { $("msg").textContent = "Zəhmət olmasa, yalnız rəqəm daxil edin."; return; }
+    var n = parseInt(raw, 10);
+    if (n < c.price) { $("msg").textContent = "Məbləğ kifayət deyil. Ən azı " + usd(c.price) + " daxil edin."; return; }
+    c.sold = true; c.change = n - c.price;
+    renderAll();
+  }
+
+  function buyInst(){
+    var c = find(sel), down = Math.round(c.price * calc.down / 100);
+    c.sold = true; c.change = 0;
+    c.plan = {down: down, months: calc.months, monthly: Math.round((c.price - down) / calc.months)};
+    renderAll();
+  }
+
+  document.addEventListener("click", function(e){
+    var t = e.target.closest("[data-act]");
+    if (!t) return;
+    var act = t.getAttribute("data-act"), id = parseInt(t.getAttribute("data-id"), 10);
+    if (act === "select") { sel = id; renderAll(); $("hero").scrollIntoView({behavior:"smooth", block:"start"}); }
+    else if (act === "fav") { var i = favs.indexOf(id); if (i >= 0) favs.splice(i, 1); else favs.push(id); saveFavs(); renderAll(); }
+    else if (act === "color") { find(sel).color = t.getAttribute("data-color"); renderAll(); }
+    else if (act === "buy") { buy(); }
+    else if (act === "buyinst") { buyInst(); }
+    else if (act === "mode") { payMode = t.getAttribute("data-mode"); renderHero(); }
+    else if (act === "favonly") { favOnly = !favOnly; t.setAttribute("aria-pressed", favOnly); renderGrid(); }
+    else if (act === "reset") { reset(); }
+  });
+  document.addEventListener("keydown", function(e){ if (e.key === "Enter" && e.target.id === "amt") buy(); });
+  document.addEventListener("input", function(e){
+    var id = e.target.id;
+    if (id === "down") { calc.down = +e.target.value; updateCalc(); }
+    else if (id === "months") { calc.months = +e.target.value; updateCalc(); }
+    else if (id === "budget") { budget = +e.target.value; $("bv").textContent = usd(budget); renderGrid(); }
+  });
+  $("sort").addEventListener("change", function(e){ sortBy = e.target.value; renderGrid(); });
+
+  reset();
+})();
+</script>
+</body>
+</html>
