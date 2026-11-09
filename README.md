@@ -42,8 +42,8 @@ docs/
 
 ## Veb versiya
 
-`docs/index.html` faylı eyni dealer mağazasının brauzerdə işləyən versiyasıdır (rəng seçimi, büdcə filtri, sevimlilər, nağd və hissə-hissə ödəniş). Quraşdırma lazım deyil, faylı brauzerdə açmaq kifayətdir. GitHub Pages ilə yayımlandıqda link belə olacaq:
-
-`https://faganaliev.github.io/BMW-CarShop/`
+`docs/index.html` faylı eyni dealer mağazasının brauzerdə işləyən versiyasıdır (rəng seçimi, büdcə filtri, sevimlilər, nağd və hissə-hissə ödəniş). Quraşdırma lazım deyil, faylı brauzerdə açmaq kifayətdir.
+**Canlı versiya:** 
+https://faganaliev.github.io/BMW-CarShop/
 
 Yeni maşın əlavə etmək üçün `CarCatalog.java` faylına bir sətir əlavə etmək kifayətdir.
